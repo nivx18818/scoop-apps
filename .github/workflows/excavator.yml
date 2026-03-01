@@ -1,0 +1,39 @@
+name: Excavator
+
+on:
+  schedule:
+    # Runs every day at 02:30 UTC
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  excavate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Scoop
+        run: |
+          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+          Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+        shell: pwsh
+
+      - name: Install Scoop dependencies
+        run: scoop install git
+        shell: pwsh
+
+      - name: Checkver and autoupdate all manifests
+        run: |
+          $scoopHome = Resolve-Path (scoop prefix scoop)
+          & "$scoopHome\bin\checkver.ps1" * -dir .\bucket -u
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push updated manifests
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "bucket"
+          message: "autoupdate: update manifests to latest versions"
+          default_author: github_actor
+          push: true

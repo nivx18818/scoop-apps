@@ -1,0 +1,16 @@
+{
+  "version": "1.5.1",
+  "description": "Inspect and explore UWP (Universal Windows Platform) app UI trees.",
+  "homepage": "https://github.com/m417z/UWPSpy",
+  "license": "MIT",
+  "url": "https://github.com/m417z/UWPSpy/releases/download/v1.5.1/UWPSpy.zip",
+  "hash": "e1431dc846acdffe2a07f94740b3485a68fee675deb993a80bf3644408a940dd",
+  "bin": "UWPSpy.exe",
+  "shortcuts": [["UWPSpy.exe", "UWPSpy"]],
+  "checkver": {
+    "github": "https://github.com/m417z/UWPSpy"
+  },
+  "autoupdate": {
+    "url": "https://github.com/m417z/UWPSpy/releases/download/v$version/UWPSpy.zip"
+  }
+}

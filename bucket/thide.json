@@ -1,0 +1,34 @@
+{
+  "version": "0.1.1",
+  "description": "Hide and manage the Windows taskbar from the command line.",
+  "homepage": "https://github.com/amnweb/thide",
+  "license": "MIT",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/amnweb/thide/releases/download/v0.1.1/thide-0.1.1-x64-portable.zip",
+      "hash": "f0300bef11555c4b170d9a6eb31e70b15076a7b3459df56010adb03fdfac7be2"
+    },
+    "arm64": {
+      "url": "https://github.com/amnweb/thide/releases/download/v0.1.1/thide-0.1.1-arm64-portable.zip",
+      "hash": "9bff6c0006fd1c0544c12f15ba6d47376e0fd2b15762c63cbcc1d848ec7f92db"
+    }
+  },
+  "bin": "thide.exe",
+  "checkver": {
+    "github": "https://github.com/amnweb/thide"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/amnweb/thide/releases/download/v$version/thide-$version-x64-portable.zip"
+      },
+      "arm64": {
+        "url": "https://github.com/amnweb/thide/releases/download/v$version/thide-$version-arm64-portable.zip"
+      }
+    },
+    "hash": {
+      "url": "https://github.com/amnweb/thide/releases/download/v$version/checksums.txt",
+      "regex": "(?<hash>[a-fA-F0-9]{64})[\\s\\S]*$basename"
+    }
+  }
+}
