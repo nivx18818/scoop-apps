@@ -20,21 +20,27 @@ jobs:
         shell: pwsh
 
       - name: Install Scoop dependencies
-        run: scoop install git
+        run: scoop install git hub
+        shell: pwsh
+
+      - name: Configure git author as github-actions
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         shell: pwsh
 
       - name: Checkver and autoupdate all manifests
         run: |
           $scoopHome = Resolve-Path (scoop prefix scoop)
-          & "$scoopHome\bin\checkver.ps1" * -dir .\bucket -u
+          $upstream = "${{ github.repository }}:${{ github.ref_name }}"
+          & "$scoopHome\bin\auto-pr.ps1" `
+            -Upstream $upstream `
+            -OriginBranch "${{ github.ref_name }}" `
+            -CommitMessageFormat "<app>: Update to version <version>" `
+            -Dir .\bucket `
+            -Push `
+            -SkipUpdated
         shell: pwsh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit and push updated manifests
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: "bucket"
-          message: "chore: autoupdate manifests to latest versions"
-          default_author: github_actions
-          push: true
+          SCOOP_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
