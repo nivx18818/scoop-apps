@@ -1,12 +1,12 @@
 {
-    "version": "0.33.0",
+    "version": "0.33.2",
     "description": "Windows system tray app that shows AI coding tool usage limits at a glance.",
     "homepage": "https://github.com/Finesssee/Win-CodexBar",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Finesssee/Win-CodexBar/releases/download/v0.33.0/CodexBar-0.33.0-portable.exe",
-            "hash": "65bbf9f65b1f230a05c908229f7b5fa522651c62589131486d3051d88269f366"
+            "url": "https://github.com/Finesssee/Win-CodexBar/releases/download/v0.33.2/CodexBar-0.33.2-portable.exe",
+            "hash": "f6f4bf4c7e597fe9d40939ff0c356dcab432c43574ac7df0cce621b2a2c98d97"
         }
     },
     "pre_install": "Rename-Item \"$dir\\CodexBar-$version-portable.exe\" \"CodexBar.exe\"",
